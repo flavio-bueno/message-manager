@@ -1,28 +1,28 @@
 # Message Manager
 
-Um pacote TypeScript para gerenciamento padronizado de mensagens com suporte a templates e registry.
+A TypeScript package for standardized message management with template and registry support.
 
-**Criado seguindo os princípios de DDD (Domain-Driven Design) e Clean Architecture**, este pacote foi projetado para organizar mensagens por domínios e agregados, facilitando a manutenção e escalabilidade em aplicações corporativas.
+**Created following DDD (Domain-Driven Design) and Clean Architecture principles**, this package was designed to organize messages by domains and aggregates, facilitating maintenance and scalability in corporate applications.
 
-## 🚀 Características
+## 🚀 Features
 
-- ✅ **Tipagem forte** com TypeScript
-- 🏗️ **Arquitetura baseada em DDD** - Organização por domínios e agregados
-- 🎯 **Clean Architecture** - Separação clara de responsabilidades
-- 🔄 **Sistema de registro** para gerenciar múltiplas classes de mensagens
-- 📝 **Templates predefinidos** para mensagens de validação comuns
-- 🔍 **Detecção de duplicatas** automática
-- 🎯 **Geração automática de códigos** hierárquicos por domínio
+- ✅ **Strong typing** with TypeScript
+- 🏗️ **DDD-based architecture** - Organization by domains and aggregates
+- 🎯 **Clean Architecture** - Clear separation of responsibilities
+- 🔄 **Registry system** to manage multiple message classes
+- 📝 **Predefined templates** for common validation messages
+- 🔍 **Automatic duplicate detection**
+- 🎯 **Automatic code generation** hierarchical by domain
 
-## 📦 Instalação
+## 📦 Installation
 
 ```bash
 npm i fb-message-manager
 ```
 
-## 🎯 Uso Básico
+## 🎯 Basic Usage
 
-### 1. Criando uma Classe de Mensagem
+### 1. Creating a Message Class
 
 ```typescript
 import { Message } from 'fb-message-manager';
@@ -48,7 +48,7 @@ class UserMessage extends Message {
 }
 ```
 
-### 2. Mensagens de Caso de Uso
+### 2. Use Case Messages
 
 ```typescript
 import { Message } from 'fb-message-manager';
@@ -64,7 +64,7 @@ class CreateUserMessage extends Message {
 }
 ```
 
-### 3. Usando o Registry
+### 3. Using the Registry
 
 ```typescript
 import { MessageRegistry } from 'fb-message-manager';
@@ -74,7 +74,7 @@ import { CreateUserMessage } from './messages/CreateUserMessage';
 const messageRegistry = new MessageRegistry()
   .register([UserMessage, CreateUserMessage]);
 
-// Obter todas as mensagens
+// Get all messages
 const allMessages = messageRegistry.getAll();
 console.log(allMessages);
 /*
@@ -86,13 +86,13 @@ console.log(allMessages);
 }
 */
 
-// Obter mensagem específica
+// Get specific message
 const message = UserMessage.getMessage('nameIsRequired');
 console.log(message);
 // { code: "user.user.nameIsRequired", message: "Name is required" }
 ```
 
-### 4. Integração com NestJS
+### 4. NestJS Integration
 
 #### Module
 
@@ -102,7 +102,7 @@ import { Routes } from '@nestjs/core';
 import { MessageRegistry } from 'fb-message-manager';
 import { MessageController } from '../message/message.controller';
 
-// Importando mensagens das camadas
+// Importing messages from layers
 import { UserMessage } from '../../domain/user/user-message';
 import { CreateUserMessage } from '../../application/usecases/user/create/create-user-message';
 
@@ -145,60 +145,60 @@ export class MessageController {
 
 ## 🔧 API Reference
 
-### Message (Classe Abstrata)
+### Message (Abstract Class)
 
-- `getAggregateName()`: Retorna o nome do agregado
-- `getSectionName()`: Gera nome da seção baseado no nome da classe  
-- `getMessage(attribute)`: Obtém uma mensagem específica com código
-- `getAllMessages()`: Retorna todas as mensagens da classe
+- `getAggregateName()`: Returns the aggregate name
+- `getSectionName()`: Generates section name based on class name  
+- `getMessage(attribute)`: Gets a specific message with code
+- `getAllMessages()`: Returns all messages from the class
 
 ### MessageRegistry
 
-- `register(classes)`: Registra array de classes de mensagem
-- `getAll()`: Retorna todas as mensagens como objeto Record<string, string>
+- `register(classes)`: Registers array of message classes
+- `getAll()`: Returns all messages as Record<string, string> object
 
-### MessageTemplate (Templates Disponíveis)
+### MessageTemplate (Available Templates)
 
-- `getIsRequired(name)`: Gera mensagem de campo obrigatório
-- `getMinLength(name, number)`: Gera mensagem de tamanho mínimo
-- `getMaxLength(name, number)`: Gera mensagem de tamanho máximo
-- `getIsInvalid(name)`: Gera mensagem de campo inválido
-- `getMinUpperCase(name, number)`: Gera mensagem de letras maiúsculas mínimas
-- `getMinLowerCase(name, number)`: Gera mensagem de letras minúsculas mínimas
-- `getMinNumber(name, number)`: Gera mensagem de números mínimos
-- `getCreateError(name)`: Gera mensagem de erro de criação
-- `getError()`: Retorna mensagem de erro genérica
-- `getNotFoundError(name)`: Gera mensagem de "não encontrado"
-- `getMustBeEqual(name)`: Gera mensagem de campos que devem ser iguais
-- `getFileMaxSize(file, size)`: Gera mensagem de tamanho máximo de arquivo
-- `getFileInvalidFormat(file, format)`: Gera mensagem de formato inválido de arquivo
-- `getGatewayIntegrationError()`: Retorna mensagem de erro de integração
+- `getIsRequired(name)`: Generates required field message
+- `getMinLength(name, number)`: Generates minimum length message
+- `getMaxLength(name, number)`: Generates maximum length message
+- `getIsInvalid(name)`: Generates invalid field message
+- `getMinUpperCase(name, number)`: Generates minimum uppercase letters message
+- `getMinLowerCase(name, number)`: Generates minimum lowercase letters message
+- `getMinNumber(name, number)`: Generates minimum numbers message
+- `getCreateError(name)`: Generates creation error message
+- `getError()`: Returns generic error message
+- `getNotFoundError(name)`: Generates "not found" message
+- `getMustBeEqual(name)`: Generates message for fields that must be equal
+- `getFileMaxSize(file, size)`: Generates maximum file size message
+- `getFileInvalidFormat(file, format)`: Generates invalid file format message
+- `getGatewayIntegrationError()`: Returns integration error message
 
-## 🏗️ Estrutura de Código Gerado
+## 🏗️ Generated Code Structure
 
-Os códigos são gerados automaticamente seguindo o padrão hierárquico do DDD:
+Codes are automatically generated following the DDD hierarchical pattern:
 
 ```
 {aggregateName}.{sectionName}.{attributeName}
 ```
 
-Esta estrutura reflete a organização por **domínios** e **agregados**, facilitando a identificação e manutenção das mensagens em aplicações que seguem Clean Architecture.
+This structure reflects the organization by **domains** and **aggregates**, facilitating identification and maintenance of messages in applications that follow Clean Architecture.
 
-**Exemplos:**
-- `user.user.nameIsRequired` - Domínio: user, Agregado: user, Atributo: nameIsRequired
-- `user.createUser.emailIsExisting` - Domínio: user, Agregado: createUser, Atributo: emailIsExisting
+**Examples:**
+- `user.user.nameIsRequired` - Domain: user, Aggregate: user, Attribute: nameIsRequired
+- `user.createUser.emailIsExisting` - Domain: user, Aggregate: createUser, Attribute: emailIsExisting
 
-## 📁 Organização Recomendada
+## 📁 Recommended Organization
 
-Estrutura de pastas seguindo os princípios de **DDD** e **Clean Architecture**:
+Folder structure following **DDD** and **Clean Architecture** principles:
 
 ```
 src/
-├── domain/                        # Camada de Domínio
+├── domain/                        # Domain Layer
 │   └── user/
-│       ├── user-message.ts        # Mensagens que compõem o agregado User
+│       ├── user-message.ts        # Messages that compose the User aggregate
 │       └── index.ts
-├── application/                   # Camada de Aplicação
+├── application/                   # Application Layer
 │   └── usecases/
 │       └── user/
 │           ├── create/
@@ -206,56 +206,56 @@ src/
 │           ├── update/
 │           │   └── update-user-message.ts
 │           └── index.ts
-├── modules/                       # Módulos
+├── modules/                       # Modules
 │   ├── user.module.ts
 │   └── message.module.ts
-├── interface/                     # Camada de Interface
+├── interface/                     # Interface Layer
 │   └── message/
 │       └── message.controller.ts
 ```
 
-### Estrutura por Camadas:
+### Layer Structure:
 
-- **Domain**: Mensagens dos agregados do domínio
-- **Application**: Mensagens dos casos de uso específicos
-- **Interface**: Controllers, módulos e apresentação
+- **Domain**: Domain aggregate messages
+- **Application**: Specific use case messages
+- **Interface**: Controllers, modules and presentation
 
-Cada domínio mantém suas mensagens organizadas por **agregados** na camada de domínio e **casos de uso** na camada de aplicação, garantindo a separação de responsabilidades da Clean Architecture.
+Each domain maintains its messages organized by **aggregates** in the domain layer and **use cases** in the application layer, ensuring Clean Architecture's separation of responsibilities.
 
-## 🚀 Build e Desenvolvimento
+## 🚀 Build and Development
 
 ```bash
-# Instalar dependências
+# Install dependencies
 npm install
 
-# Build do projeto
+# Build project
 npm run build
 
-# Desenvolvimento com watch
+# Development with watch
 npm run dev
 
 # Lint
 npm run lint
 ```
 
-## 👨‍💻 Autor
+## 👨‍💻 Author
 
 **Flávio Bueno**  
 📧 flavio.hp.bueno@outlook.com  
 🐙 [GitHub](https://github.com/flavio-bueno)
 
-## 📂 Repositório
+## 📂 Repository
 
 🔗 [message-manager](https://github.com/flavio-bueno/message-manager)
 
-## 📄 Licença
+## 📄 License
 
-Este projeto está licenciado sob a Licença MIT.
+This project is licensed under the MIT License.
 
-## 🤝 Contribuição
+## 🤝 Contributing
 
-1. Faça fork do projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/amazing-feature`)
-3. Commit suas mudanças (`git commit -m 'Add amazing feature'`)
-4. Push para a branch (`git push origin feature/amazing-feature`)
-5. Abra um Pull Request
+1. Fork the project
+2. Create a branch for your feature (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request

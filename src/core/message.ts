@@ -15,19 +15,21 @@ export abstract class Message {
 
   public static getMessage<T extends typeof Message, K extends keyof T>(
     this: T,
-    attribute: K
+    attribute: K,
   ): MessageOutput {
     return attribute in this
       ? {
-        code: `${this.getAggregateName()}.${this.getSectionName()}.${String(
-          attribute,
-        )}`,
-        message: String(this[attribute]),
-      }
+          code: `${this.getAggregateName()}.${this.getSectionName()}.${String(
+            attribute,
+          )}`,
+          message: String(this[attribute]),
+        }
       : { code: 'notFound', message: 'Message not found for request' };
   }
 
-  public static getAllMessages<T extends typeof Message>(this: T): MessageOutput[] {
+  public static getAllMessages<T extends typeof Message>(
+    this: T,
+  ): MessageOutput[] {
     return Object.entries(this)
       .filter(([key]) => key !== 'aggregateName' && key !== 'sectionName')
       .map(([key]) => this.getMessage(key as keyof Message));

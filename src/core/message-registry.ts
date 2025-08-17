@@ -6,7 +6,7 @@ export class MessageRegistry {
   public register(messageClasses: Array<typeof Message>): this {
     for (const messageClass of messageClasses) {
       const className = messageClass.name;
-      const alreadyRegistered = this.messages.find(m => m.name === className);
+      const alreadyRegistered = this.messages.find((m) => m.name === className);
       if (alreadyRegistered) {
         throw new Error(`Message already registered: ${className}`);
       }

@@ -11,38 +11,71 @@ export class UserMessage extends Message {
 
   // Mensagens de validação para nome
   public static readonly nameIsRequired = MessageTemplate.getIsRequired('Name');
-  public static readonly nameMinLength = MessageTemplate.getMinLength('Name', '2');
-  public static readonly nameMaxLength = MessageTemplate.getMaxLength('Name', '60');
+  public static readonly nameMinLength = MessageTemplate.getMinLength(
+    'Name',
+    '2',
+  );
+  public static readonly nameMaxLength = MessageTemplate.getMaxLength(
+    'Name',
+    '60',
+  );
   public static readonly nameIsInvalid = MessageTemplate.getIsInvalid('Name');
 
   // Mensagens de validação para e-mail
-  public static readonly emailIsRequired = MessageTemplate.getIsRequired('E-mail');
-  public static readonly emailIsInvalid = MessageTemplate.getIsInvalid('E-mail');
+  public static readonly emailIsRequired =
+    MessageTemplate.getIsRequired('E-mail');
+  public static readonly emailIsInvalid =
+    MessageTemplate.getIsInvalid('E-mail');
 
   // Mensagens de validação para senha
-  public static readonly passwordIsRequired = MessageTemplate.getIsRequired('Password');
-  public static readonly passwordMinUpperCase = MessageTemplate.getMinUpperCase('Password', '1');
-  public static readonly passwordMinLowerCase = MessageTemplate.getMinLowerCase('Password', '1');
-  public static readonly passwordMinNumber = MessageTemplate.getMinNumber('Password', '1');
-  public static readonly passwordMinLength = MessageTemplate.getMinLength('Password', '8');
-  public static readonly passwordMaxLength = MessageTemplate.getMaxLength('Password', '60');
-  public static readonly passwordMinSpecialChar = 'Password must have at least one special character: #?!@$%^&*-';
+  public static readonly passwordIsRequired =
+    MessageTemplate.getIsRequired('Password');
+  public static readonly passwordMinUpperCase = MessageTemplate.getMinUpperCase(
+    'Password',
+    '1',
+  );
+  public static readonly passwordMinLowerCase = MessageTemplate.getMinLowerCase(
+    'Password',
+    '1',
+  );
+  public static readonly passwordMinNumber = MessageTemplate.getMinNumber(
+    'Password',
+    '1',
+  );
+  public static readonly passwordMinLength = MessageTemplate.getMinLength(
+    'Password',
+    '8',
+  );
+  public static readonly passwordMaxLength = MessageTemplate.getMaxLength(
+    'Password',
+    '60',
+  );
+  public static readonly passwordMinSpecialChar =
+    'Password must have at least one special character: #?!@$%^&*-';
 
   // Mensagens de validação para confirmação de senha
-  public static readonly passwordConfirmationIsRequired = MessageTemplate.getIsRequired('Password confirmation');
-  public static readonly passwordConfirmationMustBeEqual = MessageTemplate.getMustBeEqual('Password confirmation');
+  public static readonly passwordConfirmationIsRequired =
+    MessageTemplate.getIsRequired('Password confirmation');
+  public static readonly passwordConfirmationMustBeEqual =
+    MessageTemplate.getMustBeEqual('Password confirmation');
 
   // Mensagens de validação para telefone
   public static readonly phoneIsInvalid = MessageTemplate.getIsInvalid('Phone');
-  public static readonly phoneMaxLength = MessageTemplate.getMaxLength('Phone', '15');
+  public static readonly phoneMaxLength = MessageTemplate.getMaxLength(
+    'Phone',
+    '15',
+  );
 
   // Mensagens de validação para data de nascimento
-  public static readonly birthDateIsRequired = MessageTemplate.getIsRequired('Birth date');
-  public static readonly birthDateIsInvalid = MessageTemplate.getIsInvalid('Birth date');
+  public static readonly birthDateIsRequired =
+    MessageTemplate.getIsRequired('Birth date');
+  public static readonly birthDateIsInvalid =
+    MessageTemplate.getIsInvalid('Birth date');
 
   // Mensagens genéricas
   public static readonly error = MessageTemplate.getError();
-  public static readonly userNotFoundError = MessageTemplate.getNotFoundError('User');
+  public static readonly userNotFoundError =
+    MessageTemplate.getNotFoundError('User');
 }
 
 // Exemplo de uso direto:
@@ -55,7 +88,7 @@ console.log('Mensagem específica:', nameRequiredMessage);
 // Obter todas as mensagens da classe
 const allUserMessages = UserMessage.getAllMessages();
 console.log('\nTodas as mensagens:');
-allUserMessages.forEach(msg => {
+allUserMessages.forEach((msg) => {
   console.log(`${msg.code}: ${msg.message}`);
 });
 

@@ -1,7 +1,7 @@
 {
-  "name": "@flavio-bueno/message-manager",
+  "name": "fb-message-manager",
   "version": "1.0.0",
-  "description": "A TypeScript library for standardized message management and localization",
+  "description": "Uma biblioteca TypeScript para gerenciamento padronizado de mensagens.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -30,14 +30,20 @@
     "README.md"
   ],
   "devDependencies": {
+    "@eslint/js": "^9.33.0",
     "@types/jest": "^29.5.5",
     "@types/node": "^20.6.0",
     "@typescript-eslint/eslint-plugin": "^6.7.0",
     "@typescript-eslint/parser": "^6.7.0",
-    "eslint": "^8.49.0",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "globals": "^16.3.0",
     "jest": "^29.7.0",
+    "jiti": "^2.5.1",
     "ts-jest": "^29.1.1",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "typescript-eslint": "^8.39.1"
   },
   "engines": {
     "node": ">=18.0.0"
